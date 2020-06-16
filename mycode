@@ -1,0 +1,26 @@
+  Future<List<dynamic>> _getProdects() async {
+    List<homepageclass> prodects = [];
+    // step 1
+    prodects = [];
+    var url ="myURL";
+    Map<String, String> headers = {"Content-type": "application/json"};
+    var response = await http.post(url, headers: headers);
+    // step 2
+    //print(response.body);
+    print("response.statusCode= ${response.statusCode}");
+    final jsonData = jsonDecode(response.body);
+
+    if (response.statusCode == 200) {
+      jsonData.forEach((element) {
+        prodects.add(homepageclass.fromJson(element));
+      });
+
+      homepageclass _selected;
+
+      var _longitude = _selected.success.products[0].brandId;
+
+      print("_longitude = $_longitude");
+
+      return prodects;
+    }
+  }
